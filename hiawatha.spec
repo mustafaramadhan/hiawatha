@@ -3,12 +3,12 @@
 
 Summary:	An advanced and secure webserver for Unix
 Name:		hiawatha
-Version:	9.3.1
-#Release:	7.2%{?dist}
-Release:	1%{?dist}
+Version:	9.5
+Release:	3%{?dist}
 Source0:	http://www.hiawatha-webserver.org/files/%{name}-%{version}.tar.gz
 Source1:	%{name}-sysvscript
 Patch0: 	hiawatha-maxuploadsize.patch
+Patch1: 	polarssl-1.3.6.patch
 License:	GPLv2+
 Group:		System Environment/Daemons
 URL:		http://www.hiawatha-webserver.org/
@@ -29,7 +29,9 @@ It has of course also thoroughly been checked and tested for buffer overflows.
 %setup -q
 #sed -i -e '/add_subdirectory(polarssl)/d' -e 's| polarssl/include||' -e 's|${POLARSSL_LIBRARY}||' CMakeLists.txt
 #sed -i '/^\tpolarssl/d' CMakeFiles.txt
+
 %patch0
+%patch1 -p1
 
 %build
 %cmake	-DENABLE_CHROOT:BOOL=ON \
@@ -70,6 +72,18 @@ install -D -m 755 %{SOURCE1} %{buildroot}%{_initrddir}/%{name}
 %{_libdir}/%{name}
 
 %changelog
+* Sun Apr 27 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 9.5-3
+- use patch for aesni.c for workaround 'old' binutils
+
+* Sat Apr 26 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 9.5-2
+- recompile without patch (because compile bnutils 2.24 for Centos 5 64bit)
+
+* Thu Apr 24 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 9.5-1
+- update to 9.5 (with patch because the same touble like 9.5 with new polarssl)
+
+* Sun Mar 27 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 9.4-1
+- update to 9.4 with patch
+
 * Thu Dec 26 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 9.3.1-1
 - update to 9.3.1
 
