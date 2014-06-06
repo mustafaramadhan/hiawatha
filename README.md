@@ -12,8 +12,8 @@ Steps for rpm creating:
     wget http://centos6.ecualinux.com/x86_64/cmake-2.8.4-1.el6.x86_64.rpm
     rpm -ivh cmake-2.8.4-1.el6.x86_64.rpm
     
-    wget https://github.com/mustafaramadhan/hiawatha/raw/patch/hiawatha-9.5-3.mr.src.rpm
-    rpm -ivh hiawatha-9.5-3.mr.src.rpm
+    wget https://github.com/mustafaramadhan/hiawatha/raw/patch/hiawatha-9.6-1.mr.src.rpm --no-check-certificate
+    rpm -ivh hiawatha-9.6-1.mr.src.rpm
     
     ### for centos 5
     cd /usr/src/redhat/SPECS
